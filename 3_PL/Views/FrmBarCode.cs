@@ -57,7 +57,7 @@ namespace _3_PL.Views
             {
                 if (captureDevice.IsRunning)
                 {
-                    captureDevice.Stop();
+                    captureDevice.SignalToStop();
                 }
             }
         }
@@ -65,7 +65,14 @@ namespace _3_PL.Views
         private void btn_add_Click(object sender, EventArgs e)
         {
             txtBar_Code = txt_barcode.Text;
-            //this.Close();
+            if (captureDevice != null)
+            {
+                if (captureDevice.IsRunning)
+                {
+                    captureDevice.SignalToStop();
+                }
+            }
+            this.Close();
         }
     }
 }
